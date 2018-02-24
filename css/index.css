@@ -1,0 +1,100 @@
+/* base */
+html, body, div, h1, h2, h3, p, span, img, input, textarea, ul, li, hr {
+	margin: 0;
+	padding: 0;
+	font-family: "Meiryo";
+}
+img {
+	border: none;
+}
+.act {
+	margin: 0;
+}
+/* 去除list默认样式 */
+ul, li {
+	list-style-type: none;
+}
+/* 去除a标签的默认样式 */
+a {
+	text-decoration: none;
+}
+/* 清除浮动 */
+.clear:after {
+	content:".";
+	height:0px;
+	font-size:0px;
+	display:block;
+	clear:both;
+}
+
+.v_show {
+	width: 1068px;
+	height: 320px;
+	border: 1px solid #666;
+}
+.v_caption {
+	width: 100%;
+	height: 60px;
+	background: #ccc;
+}
+.cartoon {
+	display: inline-block;
+	font-size: 20px;
+	line-height: 60px;
+	margin-right: 20px;
+}
+.highlight_tip {
+	display: inline-block;
+	margin-right: 20px;
+}
+.highlight_tip span {
+	display: inline-block;
+	font-size: 12px;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	border-radius: 50%;
+	background: blue;
+	color: #fff;
+	cursor: pointer;
+}
+.highlight_tip .current {
+	background: red;
+}
+.change_btn {
+	display: inline-block;
+	margin-right: 20px;
+}
+.change_btn .prev, .change_btn .next {
+	cursor: pointer;
+}
+.v_content {
+	width: 100%;
+	height: 280px;
+	margin-top: 10px;
+	font-size: 0;
+	overflow: hidden;
+}
+.v_content_list li {
+	float: left;
+	width: 240px;
+	margin-left: 20px;
+	border: 1px solid #ddd;
+}
+.v_content_list ul {
+	width: 9000px;
+}
+.v_content_list h4 a {
+	display: block;
+	height: 30px;
+	font-size: 20px;
+	color: #333;
+}
+.v_content_list span {
+	font-size: 16px;
+	color: #999;
+}
+.v_content_list li img {
+	width: 240px;
+}
