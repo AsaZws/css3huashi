@@ -2,12 +2,9 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>flex两端对齐</title>
+	<title>jq-banner</title>
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<style>
-	
-	
-	
 	</style>
 </head>
 <body>
@@ -29,7 +26,7 @@
 	</div>
 	<div class="v_content">
 		<div class="v_content_list">
-			<ul class="clear">
+			<ul>
 				<li>
 					<a href="#"><img src="images/01.jpg" alt="海贼王"></a>
 					<h4><a href="#">海贼王</a></h4>
@@ -115,33 +112,61 @@
 	</div>
 </div>
 
-<script src="js/jquery.js"></script>
+<script src="js/jquery-1.7.1.min.js"></script>
 
-	<script>
-
+<script>
+$(function(){
 	var page = 1;
-	var i = 4;
-	
-	$("span.next").click(function(){
-		var $parent = $(this).parents("div.v_show");
-		var $v_show = $parent.find("div.v_content_list");
-		var $v_content = $parent.find("div.v_content");
+	var i = 4;  // 每版放4个图片
+	// var clone = $(".v_content_list li").first().clone();
+	// 	$(".v_content_list").append(clone);
+
+	$(".next").click(function(){  // 绑定click
+
+		var $parent = $(this).parents(".v_show");  // 根据当前点击的元素获取到父元素
+		var $v_show = $parent.find(".v_content_list");  // 找到“视频内容展示区”
+		var $v_content = $parent.find(".v_content");  // 找到视频区域外围的div
 
 		var v_width = $v_content.width();
-		var len = $v_show.find("li").length;
-		var page_count = Math.ceil(len/i);
-
-		if( page == page_count ){
-			$v_show.animate({ left : '0px' }, "slow");
-			page = 1;
-		}else{
-			$v_show.animate({ left : '-=' + v_width }, "slow");
-			page ++;
+		var len = $v_show.find("li").length;  // 总的视频图片数
+		var page_count = Math.ceil(len/i);  // 只要不是整数，就往大的方向取最小的整数
+		// alert($parent.html());
+		if(!$v_show.is(":animated")){  // 判断视频展示内容是否处于动画
+			if( page == page_count ){  // 已经到最后一个版面了，如果再向后，必须跳转到第一个版面
+				
+				$v_show.animate({ left: '0px' }, "slow");  // 通过改变left值，跳转到第一个版面
+				page = 1;
+			}else{
+				$v_show.animate({ left: '-=' + v_width }, "slow");  // 改变left值，达到每次换一个版面
+				page++;
+			}
+			$parent.find("span").eq((page-1)).addClass("current").siblings().removeClass("current");
+			// 给指定的span元素添加current样式，然后去掉span元素的同辈元素上的current样式
 		}
-		$parent.find("span").eq((page-1)).addClass("current").siblings().removeClass("current");
+	});
+	$(".prev").click(function(){
+		var $parent = $(this).parents(".v_show");  // 根据当前点击的元素获取到父元素
+		var $v_show = $parent.find(".v_content_list");  // 找到“视频内容展示区”
+		var $v_content = $parent.find(".v_content");  // 找到视频区域外围的div
+
+		var v_width = $v_content.width();
+		var len = $v_show.find("li").length;  // 总的视频图片数
+		var page_count = Math.ceil(len/i);  // 只要不是整数，就往大的方向取最小的整数
+		if(!$v_show.is(":animated")){
+			if(page == 1){
+				$v_show.animate({left: '-=' + v_width*(page_count-1)}, "slow");
+				page = page_count;
+			}else{
+				$v_show.animate({left: '+=' + v_width}, "slow");
+				page--;
+			}
+			$parent.find("span").eq((page-1)).addClass("current").siblings().removeClass("current");
+		}
 	})
 
-	</script>
+});
+
+</script>
 
 </body>
 </html>
